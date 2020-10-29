@@ -15,7 +15,13 @@
   ],
   "scripts": {
     "compile": "truffle compile",
-    "prepublishOnly": "yarn run compile && node scripts/prepublish.js"
+    "prepublishOnly": "yarn run compile && node scripts/prepublish.js",
+    "dev": "nodemon --exec sucrase-node src/index.ts",
+    "test": "nodemon --exec sucrase-node src/test.ts",
+    "build": "rm -rf ./dist && sucrase src -d dist --transforms typescript,imports",
+    "run": "node ./dist/index.js",
+    "start": "pm2 start ecosystem.config.js",
+    "sonar": "./sonar/run.sh"
   },
   "dependencies": {
     "@openzeppelin/contracts": "^3.1.0",

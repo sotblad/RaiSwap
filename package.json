@@ -12,7 +12,8 @@
     "uniswap",
     "sushiswap",
     "raiswap",
-    "ethereum"
+    "ethereum",
+    "raifinance"
   ],
   "scripts": {
     "compile": "truffle compile",

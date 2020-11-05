@@ -14,7 +14,7 @@ interface IMasterChef {
     
 }
 
-contract SushiBurner
+contract RaiBurner
 {
     uint256 _pid;
     

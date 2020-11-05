@@ -15,8 +15,8 @@ contract RaiRestaurant {
     uint256 public multiplier;
     uint256 public lastMultiplerProcessBlock;
 
-    uint256 public accSushiPerShare;
-    uint256 public ackSushiBalance;
+    uint256 public accRaiPerShare;
+    uint256 public ackRaiBalance;
     uint256 public totalShares;
 
     struct UserInfo {
@@ -51,36 +51,36 @@ contract RaiRestaurant {
         }
         multiplier = multiplier.mul(fraction).div(1e18);
         lastMultiplerProcessBlock = block.number;
-        // Update accSushiPerShare / ackSushiBalance
+        // Update accRaiPerShare / ackRaiBalance
         if (totalShares > 0) {
-            uint256 additionalSushi = rai.balanceOf(address(this)).sub(ackSushiBalance);
-            accSushiPerShare = accSushiPerShare.add(additionalSushi.mul(1e12).div(totalShares));
-            ackSushiBalance = ackSushiBalance.add(additionalSushi);
+            uint256 additionalRai = rai.balanceOf(address(this)).sub(ackRaiBalance);
+            accRaiPerShare = accRaiPerShare.add(additionalRai.mul(1e12).div(totalShares));
+            ackRaiBalance = ackRaiBalance.add(additionalRai);
         }
     }
 
     // Get user pending reward. May be outdated until someone calls cleanup.
     function getPendingReward(address _user) public view returns (uint256) {
         UserInfo storage user = userInfo[_user];
-        return user.share.mul(accSushiPerShare).div(1e12).sub(user.rewardDebt);
+        return user.share.mul(accRaiPerShare).div(1e12).sub(user.rewardDebt);
     }
 
-    // Enter the restaurant. Pay some SUSHIs. Earn some shares.
+    // Enter the restaurant. Pay some RAIs. Earn some shares.
     function enter(uint256 _amount) public {
         cleanup();
         safeRaiTransfer(msg.sender, getPendingReward(msg.sender));
         rai.transferFrom(msg.sender, address(this), _amount);
-        ackSushiBalance = ackSushiBalance.add(_amount);
+        ackRaiBalance = ackRaiBalance.add(_amount);
         UserInfo storage user = userInfo[msg.sender];
         uint256 moreShare = _amount.mul(multiplier).div(1e18);
         user.amount = user.amount.add(_amount);
         totalShares = totalShares.add(moreShare);
         user.share = user.share.add(moreShare);
-        user.rewardDebt = user.share.mul(accSushiPerShare).div(1e12);
+        user.rewardDebt = user.share.mul(accRaiPerShare).div(1e12);
         emit Enter(msg.sender, _amount);
     }
 
-    // Leave the restaurant. Claim back your SUSHIs.
+    // Leave the restaurant. Claim back your RAIs.
     function leave(uint256 _amount) public {
         cleanup();
         safeRaiTransfer(msg.sender, getPendingReward(msg.sender));
@@ -89,20 +89,20 @@ contract RaiRestaurant {
         user.amount = user.amount.sub(_amount);
         totalShares = totalShares.sub(lessShare);
         user.share = user.share.sub(lessShare);
-        user.rewardDebt = user.share.mul(accSushiPerShare).div(1e12);
+        user.rewardDebt = user.share.mul(accRaiPerShare).div(1e12);
         safeRaiTransfer(msg.sender, _amount);
         emit Leave(msg.sender, _amount);
     }
 
-    // Safe sushi transfer function, just in case if rounding error causes pool to not have enough SUSHIs.
+    // Safe rai transfer function, just in case if rounding error causes pool to not have enough RAIs.
     function safeRaiTransfer(address _to, uint256 _amount) internal {
-        uint256 sushiBal = rai.balanceOf(address(this));
-        if (_amount > sushiBal) {
-            rai.transfer(_to, sushiBal);
-            ackSushiBalance = ackSushiBalance.sub(sushiBal);
+        uint256 raiBal = rai.balanceOf(address(this));
+        if (_amount > raiBal) {
+            rai.transfer(_to, raiBal);
+            ackRaiBalance = ackRaiBalance.sub(raiBal);
         } else {
             rai.transfer(_to, _amount);
-            ackSushiBalance = ackSushiBalance.sub(_amount);
+            ackRaiBalance = ackRaiBalance.sub(_amount);
         }
     }
 }

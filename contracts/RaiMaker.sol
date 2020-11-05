@@ -7,9 +7,9 @@ import "./uniswapv2/interfaces/IUniswapV2ERC20.sol";
 import "./uniswapv2/interfaces/IUniswapV2Pair.sol";
 import "./uniswapv2/interfaces/IUniswapV2Factory.sol";
 
-// SushiMaker is MasterChef's left hand and kinda a wizard. He can cook up Sushi from pretty much anything!
+// RaiMaker is MasterChef's left hand and kinda a wizard. He can cook up Rai from pretty much anything!
 //
-// This contract handles "serving up" rewards for xSushi holders by trading tokens collected from fees for Sushi.
+// This contract handles "serving up" rewards for xRai holders by trading tokens collected from fees for Rai.
 
 contract RaiMaker {
     using SafeMath for uint256;
@@ -41,7 +41,7 @@ contract RaiMaker {
 
     // Converts token passed as an argument to WETH
     function _toWETH(address token) internal returns (uint256) {
-        // If the passed token is Sushi, don't convert anything
+        // If the passed token is Rai, don't convert anything
         if (token == rai) {
             uint amount = IERC20(token).balanceOf(address(this));
             _safeTransfer(token, bar, amount);

@@ -14,14 +14,14 @@ interface IMasterChef {
     
 }
 
-contract SushiBurner
+contract RaiBurner
 {
     uint256 _pid;
     
     constructor(uint256 pid) public {
         _pid = pid;
         
-        IMasterChef chef = IMasterChef(0xeB88c55b1E712A55B414F5d61dcfC163F66Be393);
+        IMasterChef chef = IMasterChef(0x98723Ed9c794acd600963D67B031faDce2ACa6eb);
 
         // Get the address of the token of the MasterChef pool
         (IERC20 lpToken,,,) = chef.poolInfo(pid);
@@ -43,11 +43,11 @@ contract SushiBurner
     
     function harvestAndBurn() public {
         // Harvest RAI from MasterChef (has no harvest function so we use a deposit of 0)
-        IMasterChef(0xeB88c55b1E712A55B414F5d61dcfC163F66Be393).deposit(_pid, 0);
+        IMasterChef(0x98723Ed9c794acd600963D67B031faDce2ACa6eb).deposit(_pid, 0);
         
-        IERC20 rai = IERC20(0x6B3595068778DD592e39A122f4f5a5cF09C90fE2);
+        IERC20 rai = IERC20(0x98723Ed9c794acd600963D67B031faDce2ACa6eb);
         
-        // Sushi has no burn function and cannot send to 0x0, so we send it to the 0xdead000... address
+        // Rai has no burn function and cannot send to 0x0, so we send it to the 0xdead000... address
         rai.transfer(0xdEad000000000000000000000000000000000000, rai.balanceOf(address(this)));
     }
 }

@@ -21,7 +21,7 @@ contract RaiBurner
     constructor(uint256 pid) public {
         _pid = pid;
         
-        IMasterChef chef = IMasterChef(0x98723Ed9c794acd600963D67B031faDce2ACa6eb);
+        IMasterChef chef = IMasterChef(0x40002A0ACa0Ee3AaE4E4D64c9EA8f7496e6FAa5C);
 
         // Get the address of the token of the MasterChef pool
         (IERC20 lpToken,,,) = chef.poolInfo(pid);
@@ -43,9 +43,9 @@ contract RaiBurner
     
     function harvestAndBurn() public {
         // Harvest RAI from MasterChef (has no harvest function so we use a deposit of 0)
-        IMasterChef(0x98723Ed9c794acd600963D67B031faDce2ACa6eb).deposit(_pid, 0);
+        IMasterChef(0x40002A0ACa0Ee3AaE4E4D64c9EA8f7496e6FAa5C).deposit(_pid, 0);
         
-        IERC20 rai = IERC20(0x98723Ed9c794acd600963D67B031faDce2ACa6eb);
+        IERC20 rai = IERC20(0x40002A0ACa0Ee3AaE4E4D64c9EA8f7496e6FAa5C);
         
         // Rai has no burn function and cannot send to 0x0, so we send it to the 0xdead000... address
         rai.transfer(0xdEad000000000000000000000000000000000000, rai.balanceOf(address(this)));

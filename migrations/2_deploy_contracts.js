@@ -1,1 +1,5 @@
-module.exports = function(deployer) {};
+var RaiToken = artifacts.require("RaiToken");
+
+module.exports = function (deployer) {
+  deployer.deploy(RaiToken);
+};

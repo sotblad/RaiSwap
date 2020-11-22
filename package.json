@@ -29,7 +29,7 @@
     "@openzeppelin/contracts": "^3.2.0",
     "@openzeppelin/test-helpers": "^0.5.9",
     "dotenv": "^8.2.0",
-    "truffle": "^5.1.51",
+    "truffle": "^5.1.54",
     "truffle-flattener": "^1.5.0",
     "truffle-hdwallet-provider": "^1.0.17"
   },

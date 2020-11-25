@@ -7,9 +7,9 @@ var RaiRestaurant = artifacts.require("RaiRestaurant");
 
 module.exports = function (deployer) {
   deployer.deploy(RaiToken);
-  deployer.deploy(Migrator);
-  deployer.deploy(RaiBar);
   deployer.deploy(RaiMaker);
+  deployer.deploy(RaiBar);
+  deployer.deploy(Migrator);
   deployer.deploy(RaiRestaurant);
   deployer.deploy(MasterChef);
 };

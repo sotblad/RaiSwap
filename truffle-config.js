@@ -7,6 +7,7 @@ require.extensions[".txt"] = function (module, filename) {
 };
 
 const mnemonic = require(appRoot + "/mnemonic.txt");
+const testPrivateKey = require(appRoot + "/test_private_key.txt");
 
 module.exports = {
   // Uncommenting the defaults below
@@ -16,10 +17,15 @@ module.exports = {
   // for more details on how to specify configuration options!
   //
   networks: {
-    development: {
-      host: "127.0.0.1",
-      port: 8545,
-      network_id: "*",
+    // development: {
+    //   host: "127.0.0.1",
+    //   port: 8545,
+    //   network_id: "*",
+    provider: function () {
+      return new HDWalletProvider({
+        privateKeys: [testPrivateKey],
+        providerOrUrl: "http://localhost:8545",
+      });
     },
     ropsten: {
       provider: function () {
@@ -29,7 +35,7 @@ module.exports = {
         );
       },
       network_id: 3,
-      gas: 4000000
+      gas: 4000000,
     },
     //  test: {
     //    host: "127.0.0.1",

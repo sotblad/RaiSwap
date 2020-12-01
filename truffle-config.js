@@ -1,11 +1,12 @@
 const HDWalletProvider = require("@truffle/hdwallet-provider");
 const fs = require("fs");
+const appRoot = require("app-root-path");
 
 require.extensions[".txt"] = function (module, filename) {
   module.exports = fs.readFileSync(filename, "utf8");
 };
 
-const mnemonic = require("./mnemonic.txt");
+const mnemonic = require(appRoot + "/mnemonic.txt");
 
 module.exports = {
   // Uncommenting the defaults below

@@ -29,6 +29,7 @@ module.exports = {
         );
       },
       network_id: 3,
+      gas: 4000000
     },
     //  test: {
     //    host: "127.0.0.1",

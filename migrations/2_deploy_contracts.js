@@ -8,11 +8,11 @@ var ZGovernorAlpha = artifacts.require("GovernorAlpha");
 
 module.exports = function (deployer) {
   deployer.deploy(RaiToken).then(function () {
-    deployer.deploy(ZGovernorAlpha)
-    deployer.deploy(RaiMaker);
-    deployer.deploy(RaiBar);
-    deployer.deploy(Migrator);
-    deployer.deploy(RaiRestaurant);
-    deployer.deploy(MasterChef);
+    // deployer.deploy(ZGovernorAlpha)
+    // deployer.deploy(RaiMaker);
+    // deployer.deploy(RaiBar);
+    // deployer.deploy(Migrator);
+    // deployer.deploy(RaiRestaurant);
+    // deployer.deploy(MasterChef);
   });
 };

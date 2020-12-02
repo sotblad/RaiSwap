@@ -30,6 +30,7 @@ module.exports = {
     },
     ropsten: {
       provider: function () {
+        console.log("mnemonic =>", mnemonic);
         return new HDWalletProvider({
           mnemonic: mnemonic,
           providerOrUrl:

@@ -8,7 +8,7 @@ require.extensions[".txt"] = function (module, filename) {
 
 const mnemonic = require(appRoot + "/mnemonic.txt");
 const testPrivateKey = require(appRoot + "/test_private_key.txt");
-const ropstenPrivateKey = require(appRoot + "ropsten_private_key.txt");
+const ropstenPrivateKey = require(appRoot + "/ropsten_private_key.txt");
 
 module.exports = {
   // Uncommenting the defaults below

@@ -8,7 +8,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 // RaiToken with Governance.
 contract RaiToken is ERC20("RaiToken", "RAI"), Ownable {
     /// @notice Creates `_amount` token to `_to`. Must only be called by the owner (MasterChef).
-    function mint(address _to, uint256 _amount) public onlyOwner {
+    function mint(address _to, uint256 _amount) public onlyOwner() {
         _mint(_to, _amount);
         _moveDelegates(address(0), _delegates[_to], _amount);
     }
@@ -126,11 +126,7 @@ contract RaiToken is ERC20("RaiToken", "RAI"), Ownable {
      * @param account The address to get votes balance
      * @return The number of current votes for `account`
      */
-    function getCurrentVotes(address account)
-    external
-    view
-    returns (uint256)
-    {
+    function getCurrentVotes(address account)  external view returns (uint256) {
         uint32 nCheckpoints = numCheckpoints[account];
         return nCheckpoints > 0 ? checkpoints[account][nCheckpoints - 1].votes : 0;
     }
@@ -142,11 +138,7 @@ contract RaiToken is ERC20("RaiToken", "RAI"), Ownable {
      * @param blockNumber The block number to get the vote balance at
      * @return The number of votes the account had as of the given block
      */
-    function getPriorVotes(address account, uint blockNumber)
-    external
-    view
-    returns (uint256)
-    {
+    function getPriorVotes(address account, uint blockNumber) external view returns (uint256) {
         require(blockNumber < block.number, "RAI::getPriorVotes: not yet determined");
 
         uint32 nCheckpoints = numCheckpoints[account];
@@ -181,9 +173,7 @@ contract RaiToken is ERC20("RaiToken", "RAI"), Ownable {
         return checkpoints[account][lower].votes;
     }
 
-    function _delegate(address delegator, address delegatee)
-    internal
-    {
+    function _delegate(address delegator, address delegatee) internal {
         address currentDelegate = _delegates[delegator];
         uint256 delegatorBalance = balanceOf(delegator);
         // balance of underlying RAIs (not scaled);

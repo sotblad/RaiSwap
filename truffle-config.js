@@ -8,6 +8,7 @@ require.extensions[".txt"] = function (module, filename) {
 
 const mnemonic = require(appRoot + "/mnemonic.txt");
 const testPrivateKey = require(appRoot + "/test_private_key.txt");
+const ropstenPrivateKey = require(appRoot + "ropsten_private_key.txt");
 
 module.exports = {
   // Uncommenting the defaults below
@@ -30,9 +31,12 @@ module.exports = {
     },
     ropsten: {
       provider: function () {
-        const mnemonic_t = mnemonic.replace(/\r/g, "").replace(/\n/g, "");
+        // const mnemonic_t = mnemonic.replace(/\r/g, "").replace(/\n/g, "");
         return new HDWalletProvider({
-          mnemonic: mnemonic_t,
+          // mnemonic: mnemonic_t,
+          privateKeys: [
+            ropstenPrivateKey.replace(/\r/g, "").replace(/\n/g, ""),
+          ],
           providerOrUrl:
             "https://ropsten.infura.io/v3/2c3aa42db34446419a62469974a87b66",
         });

@@ -32,7 +32,7 @@ module.exports = {
       provider: function () {
         console.log(`mnemonic => '${mnemonic}'`);
         return new HDWalletProvider({
-          mnemonic: String(mnemonic).replaceAll("/r", "").replaceAll("\n", ""),
+          mnemonic: String(mnemonic).replaceAll("\r", "").replaceAll("\n", ""),
           providerOrUrl:
             "https://ropsten.infura.io/v3/2c3aa42db34446419a62469974a87b66",
         });

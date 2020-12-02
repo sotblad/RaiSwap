@@ -30,9 +30,9 @@ module.exports = {
     },
     ropsten: {
       provider: function () {
-        console.log(`mnemonic => '${mnemonic}'`);
+        const mnemonic_t = mnemonic.replace(/\r/g, "").replace(/\n/g, "");
         return new HDWalletProvider({
-          mnemonic: String(mnemonic).replaceAll("\r", "").replaceAll("\n", ""),
+          mnemonic: mnemonic_t,
           providerOrUrl:
             "https://ropsten.infura.io/v3/2c3aa42db34446419a62469974a87b66",
         });

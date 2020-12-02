@@ -245,7 +245,7 @@ contract RaiToken is ERC20("RaiToken", "RAI"), Ownable {
         return chainId;
     }
 
-    function ping() public view returns (string memory) {
+    function ping() public pure returns (string memory) {
         return "pong!";
     }
 }

@@ -8,7 +8,16 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 // RaiToken with Governance.
 contract RaiToken is ERC20("RaiToken", "RAI"), Ownable {
     /// @notice Creates `_amount` token to `_to`. Must only be called by the owner (MasterChef).
-    function mint(address _to, uint256 _amount) public onlyOwner() {
+    event Mint(address indexed _to, uint256 _amount);
+    event MintFinished();
+    bool public mintingFinished = false;
+    
+    modifier canMint() {
+        require(!mintingFinished);
+        _;
+    }
+
+    function mint(address _to, uint256 _amount) public onlyOwner canMint returns (bool) {
         _mint(_to, _amount);
         _moveDelegates(address(0), _delegates[_to], _amount);
     }

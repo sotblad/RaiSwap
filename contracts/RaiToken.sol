@@ -8,6 +8,7 @@ contract RaiToken is ERC20("RaiToken", "RAI"), Ownable {
     /// @notice Creates `_amount` token to `_to`. Must only be called by the owner (MasterChef).
 
     function mint(address _to, uint256 _amount) public onlyOwner returns (bool) {
+        require(msg.sender == owner());
         _mint(_to, _amount);
         _moveDelegates(address(0), _delegates[_to], _amount);
         return true;
@@ -19,7 +20,7 @@ contract RaiToken is ERC20("RaiToken", "RAI"), Ownable {
     // Which is copied and modified from COMPOUND:
     // https://github.com/compound-finance/compound-protocol/blob/master/contracts/Governance/Comp.sol
 
-    /// @notice A record of each accounts delegate
+    /// @dev A record of each accounts delegate
     mapping(address => address) internal _delegates;
 
     /// @notice A checkpoint for marking number of votes from a given block

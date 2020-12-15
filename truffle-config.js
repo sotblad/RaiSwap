@@ -6,7 +6,7 @@ require.extensions[".txt"] = function (module, filename) {
   module.exports = fs.readFileSync(filename, "utf8");
 };
 
-const mnemonic = require(appRoot + "/mnemonic.txt");
+// const mnemonic = require(appRoot + "/mnemonic.txt");
 const testPrivateKey = require(appRoot + "/test_private_key.txt");
 const ropstenPrivateKey = require(appRoot + "/ropsten_private_key.txt");
 

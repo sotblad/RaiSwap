@@ -1,5 +1,9 @@
-/node_modules/
-/build/
-/.idea/
-/sonar/
-/dist/
+node_modules/
+build/
+.idea/
+sonar/
+dist/
+mnemonic.txt
+test_private_key.txt
+ropsten_private_key.txt
+.vscode/

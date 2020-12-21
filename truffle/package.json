@@ -16,26 +16,29 @@
     "raifinance"
   ],
   "scripts": {
-    "compile": "truffle compile",
+    "compile": "../node_modules/.bin/truffle compile",
     "prepublishOnly": "yarn run compile && node scripts/prepublish.js",
-    "dev": "nodemon --exec sucrase-node src/index.ts",
-    "test": "nodemon --exec sucrase-node src/test.ts",
-    "build": "rm -rf ./dist && sucrase src -d dist --transforms typescript,imports",
+    "dev": "../node_modules/.bin/nodemon --exec sucrase-node src/index.ts",
+    "test": "../node_modules/.bin/nodemon --exec sucrase-node src/test.ts",
+    "build": "rm -rf ./dist && ../node_modules/.bin/sucrase src -d dist --transforms typescript,imports",
     "run": "node ./dist/index.js",
     "start": "pm2 start ecosystem.config.js",
     "sonar": "./sonar/run.sh"
   },
   "dependencies": {
-    "@openzeppelin/contracts": "^3.2.0",
+    "@openzeppelin/contracts": "^3.3.0",
     "@openzeppelin/test-helpers": "^0.5.9",
+    "@truffle/hdwallet-provider": "^1.2.0",
+    "app-root-path": "^3.0.0",
     "dotenv": "^8.2.0",
-    "truffle": "^5.1.54",
+    "truffle": "^5.1.57",
     "truffle-flattener": "^1.5.0",
     "truffle-hdwallet-provider": "^1.0.17"
   },
   "devDependencies": {
+    "@types/app-root-path": "^1.2.4",
     "nodemon": "^2.0.6",
-    "prettier": "^2.2.0",
+    "prettier": "^2.2.1",
     "sucrase": "^3.16.0"
   }
 }

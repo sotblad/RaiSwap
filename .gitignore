@@ -31,3 +31,4 @@ node_modules/
 test_private_key.txt
 mnemonic.txt
 ropsten_private_key.txt
+moonbeam-truffle-box/
